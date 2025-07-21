@@ -3,14 +3,15 @@ CoinsHub API
 API construida con NestJS, TypeORM y MySQL para gestión de empresas, departamentos, empleados e historial de asignaciones.
 
 1. Prerrequisitos
-   - Node.js ≥ 16
+   - Node.js ≥ 16\
+   - Nest (nest new nombre-del-proyecto)
    - npm o Yarn
    - MySQL ≥ 5.7
    - Python ≥ 3.8 (para generar datos de prueba)
 
 2. Instalación
    a. Clona el repositorio:
-      git clone https://github.com/tu-usuario/gestion-empresas-backend.git
+      git clone https://github.com/Dany3008/backend_prueba_t-cnica_coins
       cd gestion-empresas-backend
 
    b. Crea el archivo de entorno:
@@ -26,6 +27,19 @@ API construida con NestJS, TypeORM y MySQL para gestión de empresas, departamen
 
    c. Instala dependencias:
       npm install
+      npm instal typeorm
+      npm install typeorm@latest 
+      npm install cors 
+      npm install @nestjs/mapped-types 
+      npm install @nestjs/throttler@latest 
+      npm install --save @nestjs/swagger swagger-ui
+      npm install --save @nestjs/config @nestjs/typeorm typeorm mysql2 joi
+      npm install --save @nestjs/typeorm typeorm  mysql2 
+      npm install @nestjs/common @nestjs/core rxjs      
+      npm install @nestjs/jwt @nestjs/passport passport passport-jwt bcrypt                                                
+      npm install class-validator class-transformer dotenv              
+      npm install -g @nestjs/cli                                                     
+
       (o yarn install)
 
 3. Comandos disponibles
