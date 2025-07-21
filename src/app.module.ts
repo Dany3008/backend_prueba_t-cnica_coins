@@ -12,6 +12,8 @@ import { CompaniesModule } from './companies/companies.module';
 import { AuthModule } from './auth/auth.module';
 import { DepartmentsModule } from './departments/departments.module';
 import { EmployeesModule } from './employees/employees.module';
+import { ReportsModule }     from './reports/reports.module';
+
 //import { EmployeeDeptHistoryModule } from './dept-history/employee-dept-history.module';
 
 @Module({
@@ -50,6 +52,7 @@ import { EmployeesModule } from './employees/employees.module';
     AuthModule,
     DepartmentsModule,
     EmployeesModule,
+    ReportsModule
     // EmployeeDeptHistoryModule,
   ],
   controllers: [AppController],

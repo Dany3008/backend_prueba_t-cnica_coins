@@ -118,4 +118,93 @@ API construida con NestJS, TypeORM y MySQL para gestión de empresas, departamen
    Abre en tu navegador:
      http://localhost:3000/api-docs
 
+    Para validar tus endpoints de reports en Postman, añade en la pestaña **Tests** de cada request estos scripts:
+
+---
+
+### 1) GET /reports/summary
+validacion en postman
+Request  
+```
+GET {{base_url}}/reports/summary
+Authorization: Bearer {{accessToken}}
+```
+
+Tests (copiar en la pestaña “Tests”):
+
+```js
+// 1) Status 200
+pm.test("Status code is 200", () => {
+  pm.response.to.have.status(200);
+});
+
+// 2) Schema básico
+pm.test("Body tiene las 4 propiedades esperadas", () => {
+  const json = pm.response.json();
+  pm.expect(json).to.be.an("object");
+  pm.expect(json).to.have.property("totalDepartments").that.is.a("number");
+  pm.expect(json).to.have.property("totalEmployees").that.is.a("number");
+  pm.expect(json).to.have.property("activeEmployees").that.is.a("number");
+  pm.expect(json).to.have.property("inactiveEmployees").that.is.a("number");
+});
+
+// 3) Coherencia de totales
+pm.test("totalEmployees === activeEmployees + inactiveEmployees", () => {
+  const { totalEmployees, activeEmployees, inactiveEmployees } = pm.response.json();
+  pm.expect(totalEmployees).to.eql(activeEmployees + inactiveEmployees);
+});
+```
+
+---
+
+### 2) GET /reports/employees-by-date
+
+Request  
+```
+GET {{base_url}}/reports/employees-by-date?hiredFrom={{hiredFrom}}&hiredTo={{hiredTo}}
+Authorization: Bearer {{accessToken}}
+```
+
+Tests:
+
+```js
+// 1) Status 200
+pm.test("Status code is 200", () => {
+  pm.response.to.have.status(200);
+});
+
+// 2) Es un array de empleados
+pm.test("Body es un array", () => {
+  pm.expect(pm.response.json()).to.be.an("array");
+});
+
+// 3) Cada empleado tiene los campos esperados y fecha en rango
+pm.test("Cada empleado tiene id, nombre y fechaContratacion válida", () => {
+  const arr = pm.response.json();
+  const from = new Date(pm.request.url.getQueryString().match(/hiredFrom=([^&]*)/)[1]);
+  const to   = new Date(pm.request.url.getQueryString().match(/hiredTo=([^&]*)/)[1]);
+
+  arr.forEach(emp => {
+    pm.expect(emp).to.have.property("id").that.is.a("number");
+    pm.expect(emp).to.have.property("nombre").that.is.a("string");
+    pm.expect(emp).to.have.property("fechaContratacion").that.is.a("string");
+
+    const hired = new Date(emp.fechaContratacion);
+    pm.expect(hired >= from && hired <= to, 
+      `fechaContratacion fuera de rango: ${emp.fechaContratacion}`)
+      .to.be.true;
+  });
+});
+```
+
+---
+
+Con estos test scripts Postman validará:
+
+- Que responda correctamente (200)  
+- La forma y tipos de datos  
+- La lógica de tus reportes (sumas y rangos de fecha)  
+- Te ayudará a atrapar regresiones si cambias la lógica más adelante.
+
+
 

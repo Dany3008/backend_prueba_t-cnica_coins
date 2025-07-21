@@ -18,6 +18,7 @@ const companies_module_1 = require("./companies/companies.module");
 const auth_module_1 = require("./auth/auth.module");
 const departments_module_1 = require("./departments/departments.module");
 const employees_module_1 = require("./employees/employees.module");
+const reports_module_1 = require("./reports/reports.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -52,6 +53,7 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             departments_module_1.DepartmentsModule,
             employees_module_1.EmployeesModule,
+            reports_module_1.ReportsModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [
