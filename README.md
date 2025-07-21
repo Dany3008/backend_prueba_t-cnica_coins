@@ -99,12 +99,12 @@ API construida con NestJS, TypeORM y MySQL para gestión de empresas, departamen
        curl -X POST http://localhost:3000/departments \
          -H "Authorization: Bearer <TOKEN>" \
          -H "Content-Type: application/json" \
-         -d '{"nombre":"Ventas","descripcion":"Ventas locales"}'
+         -d '{"nombre":"Ventas","descripcion":"Ventas_locales"}'
      Actualizar:
        curl -X PATCH http://localhost:3000/departments/1 \
          -H "Authorization: Bearer <TOKEN>" \
          -H "Content-Type: application/json" \
-         -d '{"descripcion":"Ventas nacionales"}'
+         -d '{"descripcion":"dpt de ingenieria"}'
      Eliminar:
        curl -X DELETE http://localhost:3000/departments/1 \
          -H "Authorization: Bearer <TOKEN>"
